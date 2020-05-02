@@ -165,12 +165,21 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("5 POST Purchase-v1 API")]
-        public virtual void _5POSTPurchase_V1API()
+        [NUnit.Framework.TestCaseAttribute("m", "adyenEPS", "AT", "https://www.gametwist.com/en/?modal=shop", null)]
+        public virtual void _5POSTPurchase_V1API(string item, string paymentTypeId, string country, string landingURl, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 POST Purchase-v1 API", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 POST Purchase-v1 API", null, exampleTags);
 #line 52
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
+#line 53
+testRunner.Given("I have endpoint to hit purchase page api/purchase-v1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 54
+testRunner.Then(string.Format("I build the post request for purchase for {0}, {1}, {2}, {3}", item, paymentTypeId, country, landingURl), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 55
+testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 56
+testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

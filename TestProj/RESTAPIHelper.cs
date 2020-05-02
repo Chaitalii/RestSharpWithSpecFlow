@@ -19,12 +19,21 @@ namespace TestProj
         public static RestRequest restRequest;
         public static IRestResponse apiResponse;
         public static String baseUrl = "https://www.gametwist.com/nrgs/en/api";
+        public static String purchasebaseURL = "https://payments-api-v1-at.greentube.com/gametwist.widgets.web.site/en/api";
         public static string Token;
        
 
         public static RestClient SetUrl(string endPoint)
         {
             var url = baseUrl + endPoint;
+            return client = new RestClient(url);
+
+        }
+
+
+        public static RestClient SetPurchaseUrl(string endPoint)
+        {
+            var url = purchasebaseURL + endPoint;
             return client = new RestClient(url);
 
         }
@@ -102,6 +111,17 @@ namespace TestProj
             var res = output[key];
             return res;
            
+        }
+
+
+        public static RestRequest BuildPostRequest(JObject jObjectbody)
+        {
+            restRequest = new RestRequest(Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+            restRequest.AddHeader("Content-Type", "application/json");
+            restRequest.AddHeader("Authorization", "Bearer " + Token);
+            restRequest.AddParameter("application/json", jObjectbody, ParameterType.RequestBody);
+            return restRequest;
         }
 
 

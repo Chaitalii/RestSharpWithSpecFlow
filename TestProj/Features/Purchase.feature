@@ -49,7 +49,21 @@ Scenario: 4 POST UpgradeToFullRegistrationGT-v1 API
 	#| Jayashree  | Dey     | 
 	#true   | AT          | Vienna | 1050 | Wiedner Hauptstraße 94 | 43          | 12345678    | squestion_make_of_first_car |  Ferrari       | 
 
-Scenario: 5 POST Purchase-v1 API
+Scenario Outline: 5 POST Purchase-v1 API
+Given I have endpoint to hit purchase page api/purchase-v1
+Then I build the post request for purchase for <item>, <paymentTypeId>, <country>, <landingURl>
+Then I hit the request
+Then I verify HTTP status code
+
+
+
+Examples: 
+
+| item | paymentTypeId | country | landingURl                               |
+| m    | adyenEPS      | AT      | https://www.gametwist.com/en/?modal=shop |
+
+
+
 	
 
 

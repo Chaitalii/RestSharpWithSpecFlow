@@ -15,7 +15,7 @@ namespace TestProj.Steps
     public sealed class Login
     {
         [Given(@"I have endpoint to hit (.*)")]
-        public void GivenIHaveEndpointToHitEndpoint(string endpoint)
+        public void GivenIHaveEndpointToHit(string endpoint)
         {
             RESTAPIHelper.SetUrl(endpoint);
         }

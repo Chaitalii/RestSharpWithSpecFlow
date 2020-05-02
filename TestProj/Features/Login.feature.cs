@@ -70,23 +70,46 @@ namespace TestProj.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Get the token after login for given endpoint")]
-        [NUnit.Framework.CategoryAttribute("mytag")]
-        public virtual void GetTheTokenAfterLoginForGivenEndpoint()
+        [NUnit.Framework.DescriptionAttribute("1 Verify login is successful with valid username and password")]
+        public virtual void _1VerifyLoginIsSuccessfulWithValidUsernameAndPassword()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get the token after login for given endpoint", null, new string[] {
-                        "mytag"});
-#line 5
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Verify login is successful with valid username and password", null, ((string[])(null)));
+#line 3
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 6
+#line 4
  testRunner.Given("I have endpoint to hit /login-v1/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 5
+ testRunner.And("I build login post request with Testing768 and Welcome_2_gametwist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 6
+ testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 7
- testRunner.And("I hit post request with Testing768, Welcome_2_gametwist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 8
  testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 9
+#line 8
  testRunner.And("I extract the token from the response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("5 POST Purchase-v1 API")]
+        [NUnit.Framework.TestCaseAttribute("m", "adyenEPS", "AT", "https://www.gametwist.com/en/?modal=shop", null)]
+        public virtual void _5POSTPurchase_V1API(string item, string paymentTypeId, string country, string landingURl, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 POST Purchase-v1 API", null, exampleTags);
+#line 11
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 12
+testRunner.Given("I have purchase page endpoint to hit /purchase-v1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 13
+testRunner.Then(string.Format("I build the post request for purchase for {0}, {1}, {2}, {3}", item, paymentTypeId, country, landingURl), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 14
+testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 15
+testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 16
+testRunner.And("I extract the value of paymentRedirectUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
