@@ -142,6 +142,28 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("4 POST UpgradeToFullRegistrationGT-v1 API")]
+        [NUnit.Framework.TestCaseAttribute("Johnatha", "Doey", "true", "AT", "Vienna", "1050", "Wiedner Hauptstraße 94", "43", "12345678", "squestion_make_of_first_car", "Ferrari", null)]
+        public virtual void _4POSTUpgradeToFullRegistrationGT_V1API(string firstName, string lastName, string isMale, string countryCode, string city, string zip, string street, string phonePrefix, string phoneNumber, string securityQuestionTag, string securityAnswer, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 POST UpgradeToFullRegistrationGT-v1 API", null, exampleTags);
+#line 38
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 39
+ testRunner.Given("I have endpoint to hit /player/upgradeToFullRegistrationgt-v1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 40
+ testRunner.Then(string.Format("I build the upgrade to full registration post request using {0}, {1}, , {2}, {3}," +
+                        " {4} ,{5} ,{6} ,{7} ,{8}, {9} ,{10}", firstName, lastName, isMale, countryCode, city, zip, street, phonePrefix, phoneNumber, securityQuestionTag, securityAnswer), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+ testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 42
+ testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

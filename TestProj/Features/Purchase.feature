@@ -33,3 +33,29 @@ Scenario Outline: 3 Validate  GET Consent-v1 API
 	| GeneralTermsAndConditions |
 	| MarketingProfiling        |
 	| DataPrivacyPolicy         |
+
+
+Scenario Outline: 4 POST UpgradeToFullRegistrationGT-v1 API
+	Given I have endpoint to hit /player/upgradeToFullRegistrationgt-v1
+	Then I build the upgrade to full registration post request using <firstName>, <lastName>, , <isMale>, <countryCode>, <city> ,<zip> ,<street> ,<phonePrefix> ,<phoneNumber>, <securityQuestionTag> ,<securityAnswer> 
+	Then I hit the request
+	Then I verify HTTP status code
+
+
+	Examples: 
+	| firstName | lastName | isMale | countryCode | city   | zip  | street                 | phonePrefix | phoneNumber | securityQuestionTag         | securityAnswer |
+	| Johnatha  | Doey     | true   | AT          | Vienna | 1050 | Wiedner Hauptstraße 94 | 43          | 12345678    | squestion_make_of_first_car |  Ferrari       | 
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

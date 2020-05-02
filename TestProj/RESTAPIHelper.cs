@@ -73,6 +73,33 @@ namespace TestProj
             return restRequest;
         }
 
+        public static RestRequest UpgradeToFullRegistrationPostRequest(string firstName, string lastName, string male, string countryCode, string city, string zip,
+            string street, int phonePrefix, string phoneNumber, string sec_ques, string sec_ans)
+        {
+            restRequest = new RestRequest(Method.POST);
+            restRequest.RequestFormat = DataFormat.Json;
+           // restRequest.AddHeader("Content-Type", "application/json");
+            restRequest.AddHeader("Authorization", "Bearer " + Token);
+            //restRequest.AddParameter("application/json", jObjectbody, ParameterType.RequestBody); ;
+            restRequest.AddParameter("firstName", firstName);
+            restRequest.AddParameter("lastName", lastName);
+            restRequest.AddParameter("isMale", true);
+            restRequest.AddParameter("countryCode", countryCode);
+            restRequest.AddParameter("city", city);
+            restRequest.AddParameter("zip", zip);
+            restRequest.AddParameter("street", street);
+            restRequest.AddParameter("phonePrefix", phonePrefix);
+            restRequest.AddParameter("phoneNumber", phoneNumber);
+            restRequest.AddParameter("securityQuestionTag", sec_ques);
+            restRequest.AddParameter("securityAnswer", sec_ans);
+            return restRequest;
+        }
+
+
+
+
+
+
         public static string GetValueFromDictionary(string key)
         {
             var deserialise = new JsonDeserializer();
@@ -84,24 +111,24 @@ namespace TestProj
 
 
 
-       /* public static void storeValuesinDictionary(string consentType, string value)
-        {
-            
-            VerifyConsentSteps.consentTypes.Add(consentType, value);
-            
-        } */
+
         public static String GetValueFromDictionary(Dictionary<string, string> Content, string key)
         {
             String value=null;
             
-            foreach (KeyValuePair<string, string> consent in Content)
-            {
-                if (consent.Key == key)
+              foreach (KeyValuePair<string, string> consent in Content)
                 {
-                     value = consent.Value;
-                    break;
+                    if (consent.Key == key)
+                    {
+                        value = consent.Value;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
-            }
+            
             return value;
         }
     }
