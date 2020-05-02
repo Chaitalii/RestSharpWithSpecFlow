@@ -94,7 +94,7 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("2 Validate logged in user is able to send consent types")]
         [NUnit.Framework.TestCaseAttribute("GeneralTermsAndConditions", "true", null)]
-        [NUnit.Framework.TestCaseAttribute("DataPrivacyPolicy", "false", null)]
+        [NUnit.Framework.TestCaseAttribute("DataPrivacyPolicy", "true", null)]
         [NUnit.Framework.TestCaseAttribute("MarketingProfiling", "true", null)]
         public virtual void _2ValidateLoggedInUserIsAbleToSendConsentTypes(string consentType, string accepted, string[] exampleTags)
         {
@@ -117,13 +117,13 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Validate  GET Consent-v1 API")]
+        [NUnit.Framework.DescriptionAttribute("3 Validate  GET Consent-v1 API")]
         [NUnit.Framework.TestCaseAttribute("GeneralTermsAndConditions", null)]
         [NUnit.Framework.TestCaseAttribute("MarketingProfiling", null)]
         [NUnit.Framework.TestCaseAttribute("DataPrivacyPolicy", null)]
-        public virtual void ValidateGETConsent_V1API(string consentType, string[] exampleTags)
+        public virtual void _3ValidateGETConsent_V1API(string consentType, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Validate  GET Consent-v1 API", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3 Validate  GET Consent-v1 API", null, exampleTags);
 #line 23
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

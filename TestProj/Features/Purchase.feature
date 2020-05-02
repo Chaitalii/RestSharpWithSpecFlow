@@ -17,10 +17,10 @@ Scenario Outline: 2 Validate logged in user is able to send consent types
 	Examples: 
 	| consentType               | accepted |
 	| GeneralTermsAndConditions | true |
-	| DataPrivacyPolicy         | false |
+	| DataPrivacyPolicy         | true |
 	| MarketingProfiling        | true |
 
-Scenario Outline: Validate  GET Consent-v1 API
+Scenario Outline: 3 Validate  GET Consent-v1 API
 	Given I have endpoint to hit /consent/consent-v1
 	And I build consent type get request for consent type <consentType>
 	Then I hit the request
