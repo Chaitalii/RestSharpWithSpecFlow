@@ -21,7 +21,7 @@ namespace TestProj.Steps
         }
 
         [Given(@"I build login post request with (.*) and (.*)")]
-        public void GivenIHitBuildLoginRequestWithTestingWelcome__Gametwist(string nickname, string password)
+        public void GivenIHitBuildLoginRequest(string nickname, string password)
         {
             RESTAPIHelper.CreateLoginRequest(nickname, password, true);
         }
@@ -37,7 +37,8 @@ namespace TestProj.Steps
         [Then(@"I verify HTTP status code")]
         public void ThenTheResultShouldReturnResponse()
         {
-             Assert.IsTrue(RESTAPIHelper.apiResponse.StatusCode == System.Net.HttpStatusCode.OK, "Incorrect status code");
+            //Assert.IsTrue(RESTAPIHelper.apiResponse.StatusCode == System.Net.HttpStatusCode.OK, "Incorrect status code");
+            var content = RESTAPIHelper.apiResponse.Content;
             Assert.That(RESTAPIHelper.apiResponse.StatusCode , Is.EqualTo(HttpStatusCode.OK));
 
         }

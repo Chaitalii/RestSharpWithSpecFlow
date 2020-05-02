@@ -73,31 +73,26 @@ namespace TestProj
             return restRequest;
         }
 
-        public static RestRequest UpgradeToFullRegistrationPostRequest(string firstName, string lastName, string male, string countryCode, string city, string zip,
-            string street, int phonePrefix, string phoneNumber, string sec_ques, string sec_ans)
+        public static RestRequest UpgradeToFullRegistrationPostRequest(JObject jObjectbody)
         {
             restRequest = new RestRequest(Method.POST);
             restRequest.RequestFormat = DataFormat.Json;
-           // restRequest.AddHeader("Content-Type", "application/json");
+           restRequest.AddHeader("Content-Type", "application/json");
             restRequest.AddHeader("Authorization", "Bearer " + Token);
-            //restRequest.AddParameter("application/json", jObjectbody, ParameterType.RequestBody); ;
-            restRequest.AddParameter("firstName", firstName);
+            restRequest.AddParameter("application/json", jObjectbody, ParameterType.RequestBody); 
+            /*restRequest.AddParameter("firstName", firstName);
             restRequest.AddParameter("lastName", lastName);
-            restRequest.AddParameter("isMale", true);
-            restRequest.AddParameter("countryCode", countryCode);
-            restRequest.AddParameter("city", city);
-            restRequest.AddParameter("zip", zip);
-            restRequest.AddParameter("street", street);
-            restRequest.AddParameter("phonePrefix", phonePrefix);
-            restRequest.AddParameter("phoneNumber", phoneNumber);
-            restRequest.AddParameter("securityQuestionTag", sec_ques);
-            restRequest.AddParameter("securityAnswer", sec_ans);
+            restRequest.AddParameter("isMale", false);
+            restRequest.AddParameter("countryCode", "AT");
+            restRequest.AddParameter("city", "Graz");
+            restRequest.AddParameter("zip", "1050");
+            restRequest.AddParameter("street", "abd 98");
+            restRequest.AddParameter("phonePrefix", 43);
+            restRequest.AddParameter("phoneNumber", "1000009");
+            restRequest.AddParameter("securityQuestionTag", "squestion_make_of_first_car");
+            restRequest.AddParameter("securityAnswer", "Ferrari"); */
             return restRequest;
         }
-
-
-
-
 
 
         public static string GetValueFromDictionary(string key)

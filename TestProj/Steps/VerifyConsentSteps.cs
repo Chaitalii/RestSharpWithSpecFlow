@@ -60,6 +60,11 @@ namespace TestProj.Steps
 
 
 
+
+
+
+
+
         [Then(@"I validate the value of wasAccepted field")]
         public void ThenIValidateTheValueOfWasAcceptedField()
         {
