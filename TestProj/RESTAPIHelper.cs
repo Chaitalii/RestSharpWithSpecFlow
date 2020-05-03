@@ -21,7 +21,7 @@ namespace TestProj
         public static String baseUrl = "https://www.gametwist.com/nrgs/en/api";
         public static String purchasebaseURL = "https://payments-api-v1-at.greentube.com/gametwist.widgets.web.site/en/api";
         public static string Token;
-       
+       public static string paymentRedirectUrl;
 
         public static RestClient SetUrl(string endPoint)
         {

@@ -50,10 +50,11 @@ Scenario: 4 POST UpgradeToFullRegistrationGT-v1 API
 	#true   | AT          | Vienna | 1050 | Wiedner Hauptstraße 94 | 43          | 12345678    | squestion_make_of_first_car |  Ferrari       | 
 
 Scenario Outline: 5 POST Purchase-v1 API
-Given I have endpoint to hit purchase page api/purchase-v1
+Given I have purchase page endpoint to hit /purchase-v1
 Then I build the post request for purchase for <item>, <paymentTypeId>, <country>, <landingURl>
 Then I hit the request
 Then I verify HTTP status code
+And I extract the value of paymentRedirectUrl
 
 
 

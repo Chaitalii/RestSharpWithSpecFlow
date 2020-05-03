@@ -13,13 +13,11 @@ namespace TestProj.Steps
         [Then(@"I build the post request for purchase for (.*), (.*), (.*), (.*)")]
         public void ThenIBuildThePostRequestForPurchase(string item, string paymentTypeId, string country, string landingURL)
         {
-
             JObject jobjectbody = new JObject();
             jobjectbody.Add("item", item);
             jobjectbody.Add("paymentTypeId", paymentTypeId);
             jobjectbody.Add("country", country);
             jobjectbody.Add("landingURL", landingURL);
-
             RESTAPIHelper.BuildPostRequest(jobjectbody);
         }
 
@@ -33,7 +31,7 @@ namespace TestProj.Steps
         public void ThenIExtractTheValueOfPaymentRedirectUrl()
         {
             JObject obj = JObject.Parse(RESTAPIHelper.apiResponse.Content);
-            var res = obj["paymentRedirectUrl"];
+            RESTAPIHelper.paymentRedirectUrl = obj["paymentRedirectUrl"].ToString();
         }
 
 

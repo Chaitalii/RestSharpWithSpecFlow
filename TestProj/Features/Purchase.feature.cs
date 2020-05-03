@@ -173,13 +173,15 @@ this.ScenarioInitialize(scenarioInfo);
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 53
-testRunner.Given("I have endpoint to hit purchase page api/purchase-v1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("I have purchase page endpoint to hit /purchase-v1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 54
 testRunner.Then(string.Format("I build the post request for purchase for {0}, {1}, {2}, {3}", item, paymentTypeId, country, landingURl), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 55
 testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 56
 testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 57
+testRunner.And("I extract the value of paymentRedirectUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
