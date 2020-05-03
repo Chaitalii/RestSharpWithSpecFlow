@@ -115,10 +115,10 @@ testRunner.And("I extract the value of paymentRedirectUrl", ((string)(null)), ((
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Login to browser")]
-        public virtual void LoginToBrowser()
+        [NUnit.Framework.DescriptionAttribute("6 Login to browser")]
+        public virtual void _6LoginToBrowser()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Login to browser", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("6 Login to browser", null, ((string[])(null)));
 #line 26
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -142,8 +142,6 @@ testRunner.Then("I verify the failure message", ((string)(null)), ((TechTalk.Spe
 testRunner.And("I click on Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 36
 testRunner.Then("I take the scrrenshot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 37
-testRunner.And("I close the browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

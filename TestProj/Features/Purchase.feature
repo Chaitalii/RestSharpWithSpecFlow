@@ -64,6 +64,22 @@ Examples:
 | m    | adyenEPS      | AT      | https://www.gametwist.com/en/?modal=shop |
 
 
+Scenario: 6 Login to browser
+Given I have navigated to paymentRedirectUrl
+And I wait until Next button is displayed
+Then I click on Next button
+And I select the bank
+Then I click on Continue button
+And I add random values to the two input boxes
+Then I click on the login button
+Then I verify the failure message
+And I click on Cancel button
+Then I take the scrrenshot
+
+
+
+
+
 
 	
 

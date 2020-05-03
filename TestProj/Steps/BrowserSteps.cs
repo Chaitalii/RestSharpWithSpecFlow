@@ -20,10 +20,6 @@ namespace TestProj
             chromeDriver.Manage().Window.Maximize();
             wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
 
-
-
-            new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
-
         }
 
 
@@ -94,6 +90,7 @@ namespace TestProj
         [Then(@"I verify the failure message")]
         public void ThenIVerifyTheFailureMessage()
         {
+            System.Threading.Thread.Sleep(4000);
 
             chromeDriver.FindElementByXPath("//span[contains(text(), 'PIN falsch')]");
              
@@ -109,10 +106,13 @@ namespace TestProj
         [Then(@"I take the scrrenshot")]
         public void ThenITakeTheScrrenshot()
         {
+
+            System.Threading.Thread.Sleep(4000);
             Screenshot ss = ((ITakesScreenshot)chromeDriver).GetScreenshot();
             string title = "LoginFailed";
             string Runname = title + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string path = Directory.GetCurrentDirectory();
+            path = "C:\\Users\\Oli\\screenshots\\";
             string screenshotfilename = path+ Runname + ".jpg";
             ss.SaveAsFile(screenshotfilename, ScreenshotImageFormat.Png);
         }
@@ -128,7 +128,7 @@ namespace TestProj
 
             {
                 chromeDriver.Dispose();
-                chromeDriver.Close();
+                chromeDriver=null;
             }
         }
 
