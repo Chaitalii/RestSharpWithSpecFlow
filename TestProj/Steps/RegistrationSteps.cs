@@ -10,11 +10,11 @@ using TestProj.Context;
 namespace TestProj.Steps
 {
     [Binding]
-    public sealed class FullRegistration : BaseSteps
+    public sealed class RegistrationSteps : BaseSteps
     {
-        private readonly Context.APITestContext context;
+        private readonly APITestContext context;
 
-        public FullRegistration(APITestContext testContext) : base(testContext)
+        public RegistrationSteps(APITestContext testContext) : base(testContext)
         {
             this.context = testContext;
         }

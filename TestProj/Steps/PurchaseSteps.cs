@@ -11,14 +11,14 @@ using TestProj.Context;
 namespace TestProj.Steps
 {
     [Binding]
-    public sealed class Purchase : BaseSteps
+    public sealed class PurchaseSteps : BaseSteps
     {
         
         public static string paymentRedirectUrl;
 
         private readonly APITestContext context;
 
-        public Purchase(APITestContext testContext) : base(testContext)
+        public PurchaseSteps(APITestContext testContext) : base(testContext)
         {
             this.context = testContext;
         }

@@ -35,18 +35,33 @@ Scenario Outline: 3 Validate  GET Consent-v1 API
 	| DataPrivacyPolicy         |
 
 
+
+
+Scenario Outline: 4 POST UpgradeToFullRegistrationGT-v1 API
+	#Given I have endpoint to hit /player/upgradeToFullRegistrationgt-v1
+	Then I execute UpgradeToFullRegistrationGT request using <firstName>,<lastName>,<isMale>,<countryCode>,<city>,<zip>,<street>,<phonePrefix>,<phoneNumber>,<securityQuestionTag>,<securityAnswer> 
+	Then I verify response code is OK
+
+
+	Examples: 
+	| firstName | lastName | isMale | countryCode | city   | zip  | street                 | phonePrefix | phoneNumber | securityQuestionTag         | securityAnswer |
+	| Johnatha  | Doey     | true   | AT          | Vienna | 1050 | Wiedner Hauptstraße 94 | 43          | 12345678    | squestion_make_of_first_car |Ferrari       | 
+
+
+
+
 Scenario Outline: 5 POST Purchase-v1 API
 #Given I have purchase page endpoint to hit /purchase-v1
 Then I execute post request for purchase for <item>, <paymentTypeId>, <country>, <landingURl>
 Then I verify response code is OK
 And I extract the value of paymentRedirectUrl
 
-
-
 Examples: 
 
 | item | paymentTypeId | country | landingURl                               |
 | m    | adyenEPS      | AT      | https://www.gametwist.com/en/?modal=shop |
+
+
 
 
 Scenario: 6 Login to browser
@@ -60,16 +75,3 @@ Then I click on the login button
 Then I verify the failure message
 And I click on Cancel button
 Then I take the screenshot
-
-
-
-Scenario Outline: 4 POST UpgradeToFullRegistrationGT-v1 API
-	#Given I have endpoint to hit /player/upgradeToFullRegistrationgt-v1
-	Then I execute UpgradeToFullRegistrationGT request using <firstName>,<lastName>,<isMale>,<countryCode>,<city>,<zip>,<street>,<phonePrefix>,<phoneNumber>,<securityQuestionTag>,<securityAnswer> 
-	Then I verify response code is OK
-
-
-	Examples: 
-	| firstName | lastName | isMale | countryCode | city   | zip  | street                 | phonePrefix | phoneNumber | securityQuestionTag         | securityAnswer |
-	| Jayashree  | Dey     | true   | AT          | Vienna | 1050 | Wiedner Hauptstraße 94 | 43          | 12345678    | squestion_make_of_first_car |Ferrari       | 
-

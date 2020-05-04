@@ -7,25 +7,24 @@ using System.Net;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using TestProj.apiEngine;
+using TestProj.Context;
 
 namespace TestProj.Steps
 {
     [Binding]
-    public class AcceptConsent : BaseSteps
+    public class ConsentSteps : BaseSteps
     { 
         public static Dictionary<string, string> consentTypes;
         public static string ConsentAccepted;
 
-
-
-        private readonly Context.APITestContext context;
-        static AcceptConsent()
+        private readonly APITestContext context;
+        static ConsentSteps()
          {
             consentTypes = new Dictionary<string, string>();
          }
        
 
-        public AcceptConsent(Context.APITestContext testContext) : base(testContext)
+        public ConsentSteps(APITestContext testContext) : base(testContext)
         {
             this.context = testContext;
         }
@@ -61,6 +60,36 @@ namespace TestProj.Steps
             CurrentAcceptanceStatus consentStatus = new CurrentAcceptanceStatus(consentType);
           
              context.getEndPoints().getConsent(consentStatus);
+        }
+
+        [Given(@"I fetch the accepted value for (.*)")]
+        public void GivenIFetchTheAcceptedValueForGeneralTermsAndConditions(string ConsentType)
+        {
+            Dictionary<string, string> Content = ConsentSteps.consentTypes;
+            foreach (KeyValuePair<string, string> consent in Content)
+            {
+                if (consent.Key == ConsentType)
+                {
+                    ConsentAccepted = consent.Value;
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+
+
+
+        [Given(@"I validate the value of wasAccepted field")]
+        public void GivenIValidateTheValueOfWasAcceptedField()
+        {
+            RESTAPIHelper helper = new RESTAPIHelper();
+            string value = helper.GetValueFromDictionary(context.getEndPoints().response, "lastKnownConsent");
+            JObject obj = JObject.Parse(value);
+            var wasAccepted = obj["wasAccepted"].ToString().ToLower();
+            Assert.That(wasAccepted, Is.EqualTo(ConsentAccepted));
         }
 
 

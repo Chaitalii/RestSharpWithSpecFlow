@@ -96,18 +96,15 @@
     <Compile Include="apiEngine\UpgradeToFullRegistration.cs" />
     <Compile Include="Context\BrowserContext.cs" />
     <Compile Include="Context\APITestContext.cs" />
-    <Compile Include="GetConsent.cs" />
-    <Compile Include="PostConsent.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="apiEngine\EndPoints.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RESTAPIHelper.cs" />
     <Compile Include="Steps\BaseSteps.cs" />
     <Compile Include="Steps\BrowserSteps.cs" />
-    <Compile Include="Steps\FullRegistration.cs" />
-    <Compile Include="Steps\Purchase.cs" />
+    <Compile Include="Steps\RegistrationSteps.cs" />
+    <Compile Include="Steps\PurchaseSteps.cs" />
     <Compile Include="Steps\GetConsentType.cs" />
-    <Compile Include="Steps\AcceptConsent.cs" />
+    <Compile Include="Steps\ConsentSteps.cs" />
     <Compile Include="Steps\LoginSteps.cs" />
   </ItemGroup>
   <ItemGroup>

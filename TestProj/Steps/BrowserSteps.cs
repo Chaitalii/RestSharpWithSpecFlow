@@ -30,7 +30,7 @@ namespace TestProj
         [Given(@"I have navigated to paymentRedirectUrl")]
         public void GivenIHaveNavigatedToPaymentRedirectUrl()
         {
-            _webdrivercontext.driver.Navigate().GoToUrl(Purchase.paymentRedirectUrl);
+            _webdrivercontext.driver.Navigate().GoToUrl(PurchaseSteps.paymentRedirectUrl);
         }
 
                
