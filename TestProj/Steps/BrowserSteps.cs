@@ -22,7 +22,7 @@ namespace TestProj
            
             this._webdrivercontext = webdrivercontext;
             _webdrivercontext.driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(_webdrivercontext.driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(_webdrivercontext.driver, TimeSpan.FromSeconds(20));
 
         }
 
@@ -33,33 +33,22 @@ namespace TestProj
             _webdrivercontext.driver.Navigate().GoToUrl(Purchase.paymentRedirectUrl);
         }
 
-        [Given(@"I wait until Next button is displayed")]
-        public void GivenIWaitUntilNextButtonIsDisplayed()
-        {
-            
-            try
-            {
-                //wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[span(contains(text(), 'Next'))]")));
-                //_webdrivercontext.driver.FindElement(By.XPath("//button[contains(@title, 'will be')]"));
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.StackTrace);
-            }
-        }
-
-        
+               
         [Then(@"I click on Next button")]
         public void ThenIClickOnNextButton()
         {
             try
             {
-                _webdrivercontext.driver.FindElementByXPath("//button[span(contains(text(), 'Next'))]").Click();
+               IWebElement element= _webdrivercontext.driver.FindElementByXPath("//button[contains(@id,'redirect')]");
+
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(element));
+                element.Click();
+
             }
             catch(Exception e)
             {
 
-                _webdrivercontext.driver.FindElementByXPath("//button[contains(@id,'redirect')]").Click();
+                
                 
             }
         }
@@ -67,9 +56,21 @@ namespace TestProj
         [Then(@"I select the bank")]
         public void ThenISelectTheBank()
         {
-            
-            SelectElement oSelect = new SelectElement(_webdrivercontext.driver.FindElement(By.Id("epsIssuerSelect")));
-            oSelect.SelectByText("Bank Austria");
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//button[contains(@id,'redirect')]")));
+            try
+            {
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible
+                    (By.Id("epsIssuerSelect")));
+                SelectElement bank = new SelectElement(_webdrivercontext.driver.FindElement(By.Id("epsIssuerSelect")));
+                bank.SelectByText("Bank Austria");
+            }
+            catch (Exception e)
+            {
+
+                //SelectElement bank = new SelectElement(_webdrivercontext.driver.FindElement(By.Id("epsIssuerSelect")));
+                //bank.SelectByText("Bank Austria");
+                throw e;
+            }
         }
 
         [Then(@"I click on Continue button")]
@@ -97,9 +98,9 @@ namespace TestProj
         [Then(@"I verify the failure message")]
         public void ThenIVerifyTheFailureMessage()
         {
-            IWebElement web=_webdrivercontext.driver.FindElementByXPath("//span[contains(text(), 'PIN falsch')]");
+           // IWebElement web=_webdrivercontext.driver.FindElementByXPath("//span[contains(text(), 'PIN falsch')]");
 
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(web,"PIN"));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//span[contains(text(), 'PIN falsch')]")));
         }
 
         [Then(@"I click on Cancel button")]
@@ -111,14 +112,13 @@ namespace TestProj
         [Then(@"I take the screenshot")]
         public void ThenITakeTheScreenshot()
         {
-
-            System.Threading.Thread.Sleep(4000);
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlContains("nrgs-payment-status=error#returnUrl="));
             Screenshot ss = ((ITakesScreenshot)_webdrivercontext.driver).GetScreenshot();
             string title = "LoginFailed";
             string Runname = title + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string path = Directory.GetCurrentDirectory();
-            path = "C:\\Users\\Oli\\screenshots\\";
+            Directory.CreateDirectory(path+"//screenshots");
+            path = path+"\\screenshots\\";
             string screenshotfilename = path+ Runname + ".jpg";
             ss.SaveAsFile(screenshotfilename, ScreenshotImageFormat.Png);
         }

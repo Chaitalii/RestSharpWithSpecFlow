@@ -90,7 +90,7 @@
   <ItemGroup>
     <Compile Include="apiEngine\ConsentAcceptance.cs" />
     <Compile Include="apiEngine\CurrentAcceptanceStatus.cs" />
-    <Compile Include="apiEngine\Login.cs" />
+    <Compile Include="apiEngine\LoginToGameTwist.cs" />
     <Compile Include="apiEngine\ItemPurchase.cs" />
     <Compile Include="apiEngine\Route.cs" />
     <Compile Include="apiEngine\UpgradeToFullRegistration.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="RESTAPIHelper.cs" />
     <Compile Include="Steps\BaseSteps.cs" />
     <Compile Include="Steps\BrowserSteps.cs" />
-    <Compile Include="Steps\Registration.cs" />
+    <Compile Include="Steps\FullRegistration.cs" />
     <Compile Include="Steps\Purchase.cs" />
     <Compile Include="Steps\GetConsentType.cs" />
     <Compile Include="Steps\AcceptConsent.cs" />
