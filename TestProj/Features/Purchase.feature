@@ -74,7 +74,7 @@ And I add random values to the two input boxes
 Then I click on the login button
 Then I verify the failure message
 And I click on Cancel button
-Then I take the scrrenshot
+Then I take the screenshot
 
 
 

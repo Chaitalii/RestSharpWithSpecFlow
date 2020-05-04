@@ -71,22 +71,59 @@ namespace TestProj.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("1 Verify login is successful with valid username and password")]
-        public virtual void _1VerifyLoginIsSuccessfulWithValidUsernameAndPassword()
+        [NUnit.Framework.TestCaseAttribute("/login-v1/", "Testing768", "Welcome_2_gametwist", null)]
+        public virtual void _1VerifyLoginIsSuccessfulWithValidUsernameAndPassword(string endpoint, string userId, string password, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Verify login is successful with valid username and password", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("1 Verify login is successful with valid username and password", null, exampleTags);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 4
- testRunner.Given("I have endpoint to hit /login-v1/", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 5
- testRunner.And("I build login post request with Testing768 and Welcome_2_gametwist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I execute login request with userId {0} and password {1}", userId, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 6
- testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 7
- testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 8
- testRunner.And("I extract the token from the response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("I verify response code is OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("2 Validate logged in user is able to send consent types")]
+        [NUnit.Framework.TestCaseAttribute("GeneralTermsAndConditions", "true", null)]
+        [NUnit.Framework.TestCaseAttribute("DataPrivacyPolicy", "true", null)]
+        [NUnit.Framework.TestCaseAttribute("MarketingProfiling", "true", null)]
+        public virtual void _2ValidateLoggedInUserIsAbleToSendConsentTypes(string consentType, string accepted, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("2 Validate logged in user is able to send consent types", null, exampleTags);
+#line 12
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 15
+ testRunner.And(string.Format("I execute post request for given consent type {0} and accepted value as {1}", consentType, accepted), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
+ testRunner.And(string.Format("I store the {0} and accepted {1}", consentType, accepted), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 17
+ testRunner.Then("I verify response code is OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("3 Validate  GET Consent-v1 API")]
+        [NUnit.Framework.TestCaseAttribute("GeneralTermsAndConditions", null)]
+        [NUnit.Framework.TestCaseAttribute("MarketingProfiling", null)]
+        [NUnit.Framework.TestCaseAttribute("DataPrivacyPolicy", null)]
+        public virtual void _3ValidateGETConsent_V1API(string consentType, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("3 Validate  GET Consent-v1 API", null, exampleTags);
+#line 25
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 27
+ testRunner.And(string.Format("I execute get request for consent type {0}", consentType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
+ testRunner.And(string.Format("I fetch the accepted value for {0}", consentType), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+ testRunner.And("I validate the value of wasAccepted field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -97,18 +134,14 @@ this.ScenarioInitialize(scenarioInfo);
         public virtual void _5POSTPurchase_V1API(string item, string paymentTypeId, string country, string landingURl, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("5 POST Purchase-v1 API", null, exampleTags);
-#line 11
+#line 38
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 12
-testRunner.Given("I have purchase page endpoint to hit /purchase-v1", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 13
-testRunner.Then(string.Format("I build the post request for purchase for {0}, {1}, {2}, {3}", item, paymentTypeId, country, landingURl), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 14
-testRunner.Then("I hit the request", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 15
-testRunner.Then("I verify HTTP status code", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 16
+#line 40
+testRunner.Then(string.Format("I execute post request for purchase for {0}, {1}, {2}, {3}", item, paymentTypeId, country, landingURl), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 41
+testRunner.Then("I verify response code is OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 42
 testRunner.And("I extract the value of paymentRedirectUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -119,29 +152,45 @@ testRunner.And("I extract the value of paymentRedirectUrl", ((string)(null)), ((
         public virtual void _6LoginToBrowser()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("6 Login to browser", null, ((string[])(null)));
-#line 26
+#line 52
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 27
+#line 53
 testRunner.Given("I have navigated to paymentRedirectUrl", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 28
-testRunner.And("I wait until Next button is displayed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 55
 testRunner.Then("I click on Next button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 30
+#line 56
 testRunner.And("I select the bank", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 57
 testRunner.Then("I click on Continue button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 32
+#line 58
 testRunner.And("I add random values to the two input boxes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 33
+#line 59
 testRunner.Then("I click on the login button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 34
+#line 60
 testRunner.Then("I verify the failure message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 35
+#line 61
 testRunner.And("I click on Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 36
-testRunner.Then("I take the scrrenshot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 62
+testRunner.Then("I take the screenshot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("4 POST UpgradeToFullRegistrationGT-v1 API")]
+        [NUnit.Framework.TestCaseAttribute("Jayashree", "Dey", "true", "AT", "Vienna", "1050", "Wiedner Hauptstraße 94", "43", "12345678", "squestion_make_of_first_car", "Ferrari", null)]
+        public virtual void _4POSTUpgradeToFullRegistrationGT_V1API(string firstName, string lastName, string isMale, string countryCode, string city, string zip, string street, string phonePrefix, string phoneNumber, string securityQuestionTag, string securityAnswer, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("4 POST UpgradeToFullRegistrationGT-v1 API", null, exampleTags);
+#line 66
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 68
+ testRunner.Then(string.Format("I execute UpgradeToFullRegistrationGT request using {0},{1},{2},{3},{4},{5},{6},{" +
+                        "7},{8},{9},{10}", firstName, lastName, isMale, countryCode, city, zip, street, phonePrefix, phoneNumber, securityQuestionTag, securityAnswer), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 69
+ testRunner.Then("I verify response code is OK", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -52,6 +52,9 @@
     <Reference Include="RestSharp, Version=106.0.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.10.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -85,16 +88,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="apiEngine\ConsentAcceptance.cs" />
+    <Compile Include="apiEngine\CurrentAcceptanceStatus.cs" />
+    <Compile Include="apiEngine\Login.cs" />
+    <Compile Include="apiEngine\ItemPurchase.cs" />
+    <Compile Include="apiEngine\Route.cs" />
+    <Compile Include="apiEngine\UpgradeToFullRegistration.cs" />
+    <Compile Include="Context\BrowserContext.cs" />
+    <Compile Include="Context\APITestContext.cs" />
+    <Compile Include="GetConsent.cs" />
+    <Compile Include="PostConsent.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="apiEngine\EndPoints.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RESTAPIHelper.cs" />
-    <Compile Include="BrowserHelper.cs" />
+    <Compile Include="Steps\BaseSteps.cs" />
     <Compile Include="Steps\BrowserSteps.cs" />
-    <Compile Include="Steps\ConsentType.cs" />
     <Compile Include="Steps\Registration.cs" />
     <Compile Include="Steps\Purchase.cs" />
-    <Compile Include="Steps\VerifyConsentSteps.cs" />
-    <Compile Include="Steps\Login.cs" />
+    <Compile Include="Steps\GetConsentType.cs" />
+    <Compile Include="Steps\AcceptConsent.cs" />
+    <Compile Include="Steps\LoginSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Features\Login.feature" />
@@ -104,6 +118,7 @@
     <None Include="Features\VerifyConsent.feature" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

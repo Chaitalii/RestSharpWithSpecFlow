@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestProj.Steps
+namespace TestProj
 {
-    public class ConsentType
+    class PostConsent
     {
-
-        public string Consent{ get; set; }
     }
 }

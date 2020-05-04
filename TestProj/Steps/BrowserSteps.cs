@@ -4,21 +4,25 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.IO;
 using TechTalk.SpecFlow;
+using TestProj.Context;
+using TestProj.Steps;
 
 namespace TestProj
 {
     [Binding]
     public class BrowserSteps : IDisposable
     {
-        private ChromeDriver chromeDriver;
+       
         WebDriverWait wait;
+        
+        private readonly BrowserContext _webdrivercontext;
 
-
-        public BrowserSteps()
+        public BrowserSteps(BrowserContext webdrivercontext)
         {
-            chromeDriver = new ChromeDriver();
-            chromeDriver.Manage().Window.Maximize();
-            wait = new WebDriverWait(chromeDriver, TimeSpan.FromSeconds(10));
+           
+            this._webdrivercontext = webdrivercontext;
+            _webdrivercontext.driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(_webdrivercontext.driver, TimeSpan.FromSeconds(10));
 
         }
 
@@ -26,16 +30,17 @@ namespace TestProj
         [Given(@"I have navigated to paymentRedirectUrl")]
         public void GivenIHaveNavigatedToPaymentRedirectUrl()
         {
-            chromeDriver.Navigate().GoToUrl(RESTAPIHelper.paymentRedirectUrl);
+            _webdrivercontext.driver.Navigate().GoToUrl(Purchase.paymentRedirectUrl);
         }
 
         [Given(@"I wait until Next button is displayed")]
         public void GivenIWaitUntilNextButtonIsDisplayed()
         {
-            //var nextButton = chromeDriver.FindElement(By.XPath(""));
+            
             try
             {
-                wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[span(contains(text(), 'Next'))]")));
+                //wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//button[span(contains(text(), 'Next'))]")));
+                //_webdrivercontext.driver.FindElement(By.XPath("//button[contains(@title, 'will be')]"));
             }
             catch(Exception e)
             {
@@ -49,66 +54,67 @@ namespace TestProj
         {
             try
             {
-                chromeDriver.FindElementByXPath("//button[span(contains(text(), 'Next'))]").Click();
+                _webdrivercontext.driver.FindElementByXPath("//button[span(contains(text(), 'Next'))]").Click();
             }
             catch(Exception e)
             {
-                System.Threading.Thread.Sleep(4000);
+
+                _webdrivercontext.driver.FindElementByXPath("//button[contains(@id,'redirect')]").Click();
+                
             }
         }
 
         [Then(@"I select the bank")]
         public void ThenISelectTheBank()
         {
-            System.Threading.Thread.Sleep(5000);
-            SelectElement oSelect = new SelectElement(chromeDriver.FindElement(By.Id("epsIssuerSelect")));
+            
+            SelectElement oSelect = new SelectElement(_webdrivercontext.driver.FindElement(By.Id("epsIssuerSelect")));
             oSelect.SelectByText("Bank Austria");
         }
 
         [Then(@"I click on Continue button")]
         public void ThenIClickOnContinueButton()
         {
-            chromeDriver.FindElementById("mainSubmit").Click();
+            _webdrivercontext.driver.FindElementById("mainSubmit").Click();
         }
 
         [Then(@"I add random values to the two input boxes")]
         public void ThenIAddRandomValuesToTheTwoInputBoxes()
         {
 
-            chromeDriver.FindElementById("gebForm:verf_ID").SendKeys("test");
+            _webdrivercontext.driver.FindElementById("gebForm:verf_ID").SendKeys("test");
 
-            chromeDriver.FindElementById("gebForm:pin_ID").SendKeys("test");
+            _webdrivercontext.driver.FindElementById("gebForm:pin_ID").SendKeys("test");
 
              }
 
         [Then(@"I click on the login button")]
         public void ThenIClickOnTheLoginButton()
         {
-            chromeDriver.FindElementById("gebForm:LoginCommandButton").Click();
+            _webdrivercontext.driver.FindElementById("gebForm:LoginCommandButton").Click();
         }
 
         [Then(@"I verify the failure message")]
         public void ThenIVerifyTheFailureMessage()
         {
-            System.Threading.Thread.Sleep(4000);
+            IWebElement web=_webdrivercontext.driver.FindElementByXPath("//span[contains(text(), 'PIN falsch')]");
 
-            chromeDriver.FindElementByXPath("//span[contains(text(), 'PIN falsch')]");
-             
-            
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.TextToBePresentInElement(web,"PIN"));
         }
 
         [Then(@"I click on Cancel button")]
         public void ThenIClickOnCancelButton()
         {
-            chromeDriver.FindElementByXPath("//a[span[span[contains(@class, 'logout')]]]").Click();
+            _webdrivercontext.driver.FindElementByXPath("//a[span[span[contains(@class, 'logout')]]]").Click();
         }
 
-        [Then(@"I take the scrrenshot")]
-        public void ThenITakeTheScrrenshot()
+        [Then(@"I take the screenshot")]
+        public void ThenITakeTheScreenshot()
         {
 
             System.Threading.Thread.Sleep(4000);
-            Screenshot ss = ((ITakesScreenshot)chromeDriver).GetScreenshot();
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlContains("nrgs-payment-status=error#returnUrl="));
+            Screenshot ss = ((ITakesScreenshot)_webdrivercontext.driver).GetScreenshot();
             string title = "LoginFailed";
             string Runname = title + DateTime.Now.ToString("yyyy-MM-dd-HH_mm_ss");
             string path = Directory.GetCurrentDirectory();
@@ -120,15 +126,15 @@ namespace TestProj
         [Then(@"I close the browser")]
         public void ThenICloseTheBrowser()
         {
-            chromeDriver.Close();
+            _webdrivercontext.driver.Close();
         }
         public void Dispose()
         {
-            if (chromeDriver!=null)
+            if (_webdrivercontext.driver != null)
 
             {
-                chromeDriver.Dispose();
-                chromeDriver=null;
+                _webdrivercontext.driver.Dispose();
+                _webdrivercontext.driver = null;
             }
         }
 

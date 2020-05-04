@@ -1,37 +1,43 @@
 ﻿using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TechTalk.SpecFlow;
+using TestProj.apiEngine;
+using TestProj.Context;
 
 namespace TestProj.Steps
 {
     [Binding]
-    public sealed class Purchase
+    public sealed class Purchase : BaseSteps
     {
-        [Then(@"I build the post request for purchase for (.*), (.*), (.*), (.*)")]
-        public void ThenIBuildThePostRequestForPurchase(string item, string paymentTypeId, string country, string landingURL)
+        
+        public static string paymentRedirectUrl;
+
+        private readonly APITestContext context;
+
+        public Purchase(APITestContext testContext) : base(testContext)
         {
-            JObject jobjectbody = new JObject();
-            jobjectbody.Add("item", item);
-            jobjectbody.Add("paymentTypeId", paymentTypeId);
-            jobjectbody.Add("country", country);
-            jobjectbody.Add("landingURL", landingURL);
-            RESTAPIHelper.BuildPostRequest(jobjectbody);
+            this.context = testContext;
         }
 
-        [Given(@"I have purchase page endpoint to hit (.*)")]
-        public void GivenIHavePurchasePageEndpointToHitPurchasePage(string endpoint)
+        [Then(@"I execute post request for purchase for (.*), (.*), (.*), (.*)")]
+        public void ThenIExecuteThePostRequestForPurchase(string item, string paymentTypeId, string country, string landingURL)
         {
-            RESTAPIHelper.SetPurchaseUrl(endpoint);
-        }
 
+             ItemPurchase purchase = new ItemPurchase(item, paymentTypeId,country,landingURL);
+             context.getEndPoints().purchase(purchase);
+
+           }
+
+       
         [Then(@"I extract the value of paymentRedirectUrl")]
         public void ThenIExtractTheValueOfPaymentRedirectUrl()
         {
-            JObject obj = JObject.Parse(RESTAPIHelper.apiResponse.Content);
-            RESTAPIHelper.paymentRedirectUrl = obj["paymentRedirectUrl"].ToString();
+            JObject obj = JObject.Parse(context.getEndPoints().response.Content);
+            paymentRedirectUrl = obj["paymentRedirectUrl"].ToString();
         }
 
 

@@ -213,7 +213,7 @@ testRunner.Then("I verify the failure message", ((string)(null)), ((TechTalk.Spe
 #line 76
 testRunner.And("I click on Cancel button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 77
-testRunner.Then("I take the scrrenshot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I take the screenshot", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
