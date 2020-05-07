@@ -64,7 +64,7 @@ Examples:
 
 
 
-Scenario: 6 Login to browser
+Scenario: 6 Login with invalid credentials
 Given I have navigated to paymentRedirectUrl
 Then I click on Next button
 And I select the bank
