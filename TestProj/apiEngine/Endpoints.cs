@@ -17,10 +17,10 @@ namespace TestProj
 
         private readonly static String BASE_URL = "https://www.gametwist.com/nrgs/en/api";
         private readonly static String PURCHASE_BASE_URL = "https://payments-api-v1-at.greentube.com/gametwist.widgets.web.site/en/api";
-        private  RestRequest restRequest;
+        public  RestRequest restRequest;
         private RestClient client ;
         private static  string auth_token;
-        private string url;
+        private  string url;
         public  IRestResponse response;
 
 

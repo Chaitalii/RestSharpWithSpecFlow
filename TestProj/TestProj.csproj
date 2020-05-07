@@ -103,16 +103,11 @@
     <Compile Include="Steps\BrowserSteps.cs" />
     <Compile Include="Steps\RegistrationSteps.cs" />
     <Compile Include="Steps\PurchaseSteps.cs" />
-    <Compile Include="Steps\GetConsentType.cs" />
     <Compile Include="Steps\ConsentSteps.cs" />
     <Compile Include="Steps\LoginSteps.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Features\Login.feature" />
-    <None Include="Features\SpecFlowFeature1.feature" />
-    <None Include="Features\GetConsent.feature" />
     <None Include="Features\Purchase.feature" />
-    <None Include="Features\VerifyConsent.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

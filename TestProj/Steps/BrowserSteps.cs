@@ -65,10 +65,7 @@ namespace TestProj
                 bank.SelectByText("Bank Austria");
             }
             catch (Exception e)
-            {
-
-                //SelectElement bank = new SelectElement(_webdrivercontext.driver.FindElement(By.Id("epsIssuerSelect")));
-                //bank.SelectByText("Bank Austria");
+            { 
                 throw e;
             }
         }
@@ -98,9 +95,7 @@ namespace TestProj
         [Then(@"I verify the failure message")]
         public void ThenIVerifyTheFailureMessage()
         {
-           // IWebElement web=_webdrivercontext.driver.FindElementByXPath("//span[contains(text(), 'PIN falsch')]");
-
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//span[contains(text(), 'PIN falsch')]")));
+             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("//span[contains(text(), 'PIN falsch')]")));
         }
 
         [Then(@"I click on Cancel button")]

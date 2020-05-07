@@ -13,9 +13,7 @@ namespace TestProj.Context
     {
 
         public ChromeDriver driver;
-        private EndPoints endPoints;
-        private String BASE_URL = "https://www.gametwist.com/nrgs/en/api";
-
+        
         public BrowserContext()
         {
             driver = new ChromeDriver();

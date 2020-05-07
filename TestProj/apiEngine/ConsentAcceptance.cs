@@ -11,13 +11,12 @@ namespace TestProj.apiEngine
     {
         public string consentType;
         public string accepted;
-       //public  string queryString;
-
+       
         public ConsentAcceptance(string consentType, string accepted)
         {
             this.consentType = consentType;
             this.accepted = accepted;
-           // queryString = "consentType=" + consentType + "&accepted=" + accepted;
+           
         }
     }
 }

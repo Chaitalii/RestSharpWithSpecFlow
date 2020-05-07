@@ -10,7 +10,7 @@ namespace TestProj.Steps
     public class BaseSteps
     {
 
-          private EndPoints endPoints;
+       private EndPoints endPoints;
  
     public BaseSteps(APITestContext testContext) {
      endPoints = testContext.getEndPoints();

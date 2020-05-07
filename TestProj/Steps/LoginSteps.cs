@@ -19,6 +19,21 @@ namespace TestProj.Steps
     {
         private readonly APITestContext context;
 
+        [Given(@"I have the request ready")]
+        public void GivenIHaveRequestReady()
+        {
+            if (context.getEndPoints().restRequest.Equals(null))
+
+            {
+                Assert.Fail();
+            }
+            else
+            {
+                Console.WriteLine("endpoint has a value");
+            }
+        }
+
+
         public LoginToGameTwistSteps(APITestContext testContext)  : base(testContext)
         {
             this.context = testContext;

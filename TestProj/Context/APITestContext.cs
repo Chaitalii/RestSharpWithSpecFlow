@@ -10,10 +10,7 @@ namespace TestProj.Context
 {
   public  class APITestContext
     {
-
-        public ChromeDriver driver;
         private EndPoints endPoints;
-       // private  String BASE_URL = "https://www.gametwist.com/nrgs/en/api";
 
         public APITestContext()
         {
