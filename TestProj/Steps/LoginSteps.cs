@@ -27,10 +27,7 @@ namespace TestProj.Steps
             {
                 Assert.Fail();
             }
-            else
-            {
-                Console.WriteLine("endpoint has a value");
-            }
+            
         }
 
 
